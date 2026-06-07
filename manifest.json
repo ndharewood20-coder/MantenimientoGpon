@@ -1,0 +1,27 @@
+{
+  "name": "CANTV — Sistema de Gestión GPON",
+  "short_name": "CANTV GPON",
+  "description": "Sistema de gestión de mantenimiento para la red de fibra óptica GPON de CANTV",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#001E5C",
+  "theme_color": "#0033A0",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "es",
+  "dir": "ltr"
+}
