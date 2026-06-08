@@ -19,7 +19,7 @@
 
 <style>
 /* ============================================================
-   VARIABLES & RESET (Identidad OPTINET Estilo Premium)
+   VARIABLES e IDENTIDAD VISUAL (OPTINET PREMIUM)
    ============================================================ */
 :root {
   --blue:       #0033A0;
@@ -35,6 +35,460 @@
   --bg:         #EEF2F9;
   --card:       #FFFFFF;
   --border:     #D0D9EC;
+  --txt:        #1A2B4A;
+  --txt-muted:  #5A6E8C;
+  --shadow:     0 2px 12px rgba(0,30,100,.10);
+  --shadow-lg:  0 6px 24px rgba(0,30,100,.15);
+  --radius:     12px;
+  --radius-sm:  8px;
+  --sidebar-w:  260px;
+  --header-h:   64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+}
+.hidden { display: none !important; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+
+/* ============================================================
+   PANTALLA DE ACCESO (LOGIN)
+   ============================================================ */
+#login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 50%, var(--cyan) 100%);
+  padding: 20px;
+}
+.login-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.3);
+  text-align: center;
+}
+.login-logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.login-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  letter-spacing: -0.5px;
+}
+.login-title span { color: var(--orange); }
+.login-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--txt-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.login-meaning {
+  font-size: 11px;
+  color: var(--blue-mid);
+  font-style: italic;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+.form-group { margin-bottom: 16px; text-align: left; }
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--txt-muted);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: #F8FAFF;
+}
+.form-group input:focus { outline: none; border-color: var(--blue); background: #fff; }
+
+/* Botones universales */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 18px; border: none; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; transition: all .2s; white-space: nowrap;
+}
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: var(--blue-dark); }
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-orange:hover { background: var(--orange-dk); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-outline:hover { background: var(--blue); color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-lg { padding: 14px 24px; font-size: 15px; width: 100%; }
+
+/* ============================================================
+   ARQUITECTURA DE INTERFAZ (ESCRITORIO / WEB GLOBAL)
+   ============================================================ */
+#app-shell { display: flex; flex-direction: column; min-height: 100vh; }
+.app-header {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+  background: var(--blue-dark); color: #fff; display: flex; align-items: center;
+  padding: 0 24px; gap: 12px; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.header-brand { display: flex; align-items: center; gap: 10px; flex: 1; }
+.header-brand-text { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
+.header-brand-text span { color: var(--orange); }
+
+/* Menú hamburguesa (Visible solo en entornos móviles) */
+.menu-toggle-btn {
+  display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer;
+}
+
+.header-user { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+.header-user-info { text-align: right; }
+.header-user-info .uname { font-weight: 700; }
+.header-user-info .urole { font-size: 11px; color: var(--cyan); font-weight: 600; }
+
+/* BARRA LATERAL (SIDEBAR FINA DE ESCRITORIO) */
+.app-sidebar {
+  position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--sidebar-w);
+  background: #0d1b3e; overflow-y: auto; z-index: 90; display: flex; flex-direction: column; 
+  border-right: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease;
+}
+.sidebar-section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: rgba(255,255,255,.4); padding: 16px 16px 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+  color: rgba(255,255,255,.75); font-size: 14px; font-weight: 500;
+  border: none; background: none; width: 100%; text-align: left; transition: all .2s;
+  border-left: 4px solid transparent;
+}
+.nav-item:hover { background: rgba(255,255,255,.05); color: #fff; }
+.nav-item.active { background: rgba(0,169,224,.15); color: #fff; border-left-color: var(--orange); font-weight: 700; }
+
+/* CONTENEDOR CENTRAL WEB */
+.app-main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 32px; min-height: calc(100vh - var(--header-h)); }
+
+/* TARJETAS, DISEÑOS DE GRILLAS Y RECUENTOS */
+.card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 24px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.card-title { font-size: 16px; font-weight: 700; color: var(--blue-dark); }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 24px; }
+.kpi-card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border-left: 4px solid var(--cyan); }
+.kpi-card.kpi-good { border-left-color: var(--green); }
+.kpi-card.kpi-bad  { border-left-color: var(--red); }
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--txt-muted); text-transform: uppercase; }
+.kpi-value { font-size: 32px; font-weight: 800; margin: 6px 0; color: var(--blue-dark); }
+
+.table-wrap { overflow-x: auto; margin-top: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+thead th { background: var(--blue-dark); color: #fff; padding: 12px 14px; text-align: left; font-weight: 600; }
+tbody td { padding: 12px 14px; border-bottom: 1px solid #EEF2F9; color: var(--txt); }
+tbody tr:hover td { background: rgba(245, 130, 32, 0.03); }
+
+.pill { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.pill-pend { background: #FFF3E0; color: #E65100; }
+.pill-prog { background: #E3F2FD; color: #0277BD; }
+.pill-done { background: #E8F5E9; color: #2E7D32; }
+.pill-crit { background: #FFEBEE; color: #C62828; }
+
+/* CONFIGURACIÓN FORMULARIOS */
+.form-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.form-col { flex: 1; min-width: 200px; }
+.form-col label { display: block; font-size: 12px; font-weight: 600; color: var(--txt-muted); margin-bottom: 6px; }
+.form-col input, .form-col select, .form-col textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; background: #F8FAFF; }
+.form-col input:focus, .form-col select:focus { outline: none; border-color: var(--blue); background: #fff; }
+
+.check-grid-planilla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+.planilla-row-item { display: flex; align-items: center; justify-content: space-between; background: #F8FAFF; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.planilla-ok-nok { display: flex; gap: 12px; font-weight: 600; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: #fff; border-radius: 16px; padding: 28px; width: 100%; max-width: 750px; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+
+/* ============================================================
+   DISEÑO ADAPTATIVO (MEDIA QUERIES INTEGRADOS DISPOSITIVOS)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .app-sidebar { transform: translateX(-100%); }
+  .app-sidebar.open { transform: translateX(0); }
+  .app-main { margin-left: 0; padding: 20px; }
+  .menu-toggle-btn { display: block; }
+}
+
+@media (max-width: 768px) {
+  .check-grid-planilla { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo"><img src="icon.png" alt="OPTINET" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3177/3177440.png'"></div>
+    <div class="login-title">OPTI<span>NET</span></div>
+    <div class="login-sub">Plataforma Operativa de Red</div>
+    <div class="login-meaning">Sistema Inteligente de Operaciones, Monitoreo y Mantenimiento de Redes Ópticas</div>
+    
+    <div class="form-group">
+      <label>Usuario</label>
+      <input type="text" id="login-user" placeholder="Ej: admin">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <button class="btn btn-primary btn-lg" onclick="doLogin()">Autenticar en Tiempo Real</button>
+  </div>
+</div>
+
+<div id="app-shell" class="hidden">
+  <header class="app-header">
+    <button class="menu-toggle-btn" onclick="toggleMobileSidebar()">☰</button>
+    <div class="header-brand">
+      <span class="header-brand-text">OPTI<span>NET</span></span>
+    </div>
+    <div class="header-user">
+      <div class="header-user-info">
+        <div class="uname" id="header-name"></div>
+        <div class="urole" id="header-role"></div>
+      </div>
+      <button class="btn btn-sm btn-orange" onclick="doLogout()">Salir</button>
+    </div>
+  </header>
+  
+  <nav class="app-sidebar" id="sidebar">
+    <div id="nav-items"></div>
+  </nav>
+  
+  <main class="app-main" id="main-content"></main>
+</div>
+
+<div id="modal-container"></div>
+
+<script>
+/* ============================================================
+   CAPA DE SINCRONIZACIÓN FIREBASE REALTIME ENGINE
+   ============================================================ */
+const firebaseConfig = {
+  databaseURL: "https://optinet-gpon-default-rtdb.firebaseio.com/" 
+};
+
+let rtdb = null;
+try {
+  if (firebase.apps.length === 0) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  rtdb = firebase.database();
+} catch (e) {
+  console.warn("Conmutando a capa local tolerante a fallas.");
+}
+
+const ZONES = ['ALTAVISTA','EL CALLAO','EL GURI','LA SABANITA','PUERTO ORDAZ','UNARE','UPATA'];
+
+const FAULT_CATEGORIES = {
+  'LOS':  { label: 'Pérdida de Señal PON (LOS)', sev: 1, proc: 'MC-02', color: '#B71C1C' },
+  'CORTE':{ label: 'Corte de Cable', sev: 1, proc: 'MC-03', color: '#B71C1C' },
+  'OLT_FALLA': { label: 'Falla Total OLT', sev: 1, proc: 'MC-01', color: '#B71C1C' },
+  'NNV':  { label: 'No Navega (NNV)', sev: 2, proc: 'MC-04', color: '#C62828' },
+  'NONAV':{ label: 'Sin Navegación (NONAV)', sev: 2, proc: 'MC-04', color: '#E65100' },
+  'TELIP': { label: 'Falla Telefonía IP', sev: 3, proc: 'MC-04', color: '#0277BD' },
+  'ONT_DANADO': { label: 'ONT Dañada', sev: 4, proc: 'MC-04', color: '#F57F17' },
+  'NL':   { label: 'Navega Lento (NL)', sev: 5, proc: 'MC-05', color: '#9C27B0' },
+  'DEGRAD': { label: 'Degradación de Señal', sev: 5, proc: 'MC-05', color: '#6A1B9A' }
+};
+
+let DB = {
+  users: [
+    {user:'admin', pass:'admin123', role:'admin', name:'Gerente General', zona:'Todas'},
+    {user:'gerente_unare', pass:'gerente123', role:'gerente_zona', name:'Gerente Zonal Unare', zona:'UNARE'},
+    {user:'tecnico1', pass:'tec123', role:'tecnico', name:'José Rangel', zona:'UNARE'}
+  ],
+  averias: [],
+  ordenes: []
+};
+
+let SESSION = null;
+
+function syncData(action = 'pull', callback = null) {
+  if (rtdb) {
+    if (action === 'push') {
+      rtdb.ref('optinet_db').set(DB);
+    } else {
+      rtdb.ref('optinet_db').on('value', snapshot => {
+        const data = snapshot.val();
+        if (data) {
+          DB = data;
+          if (callback) callback();
+        }
+      });
+    }
+  } else {
+    if (action === 'push') {
+      localStorage.setItem('optinet_local_db', JSON.stringify(DB));
+    } else {
+      const local = localStorage.getItem('optinet_local_db');
+      if (local) DB = JSON.parse(local);
+      if (callback) callback();
+    }
+  }
+}
+
+function toggleMobileSidebar() {
+  const sb = document.getElementById('sidebar');
+  sb.classList.toggle('open');
+}
+
+/* ============================================================
+   AUTENTICACIÓN Y FILTRADO ESTRUCTURAL DE PESTAÑAS (ROLES)
+   ============================================================ */
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value.trim();
+  
+  const found = DB.users.find(x => x.user === u && x.pass === p);
+  if (!found) { alert('Credenciales incorrectas o problemas de conexión.'); return; }
+  
+  SESSION = found;
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  document.getElementById('header-name').textContent = found.name;
+  
+  let roleText = 'Técnico de Campo';
+  if (found.role === 'admin') roleText = 'Gerente General (Nacional)';
+  if (found.role === 'gerente_zona') roleText = `Gerente de Zona · ${found.zona}`;
+  document.getElementById('header-role').textContent = roleText;
+  
+  buildHierarchicalMenu();
+}
+
+function doLogout() {
+  SESSION = null;
+  location.reload();
+}
+
+function buildHierarchicalMenu() {
+  const nav = document.getElementById('nav-items');
+  nav.innerHTML = '';
+  
+  let menu = [];
+  if (SESSION.role === 'admin') {
+    menu = [
+      { id: 'kpis', label: '📊 KPIs Nacionales', section: 'Métricas Globales' },
+      { id: 'averias', label: '📥 Captura de Averías', section: 'Operaciones' },
+      { id: 'ordenes', label: '📝 Órdenes de Trabajo', section: 'Operaciones' },
+      { id: 'usuarios', label: '👥 Personal de Cuadrillas', section: 'Configuración' }
+    ];
+  } else if (SESSION.role === 'gerente_zona') {
+    menu = [
+      { id: 'zona-view', label: '📈 Dashboard Operativo', section: 'Métricas Zonal' },
+      { id: 'averias', label: '🔍 Averías Geográficas', section: 'Operaciones' },
+      { id: 'ordenes', label: '📝 Órdenes de Trabajo', section: 'Operaciones' },
+      { id: 'usuarios', label: '🛠️ Mis Técnicos', section: 'Configuración' }
+    ];
+  } else if (SESSION.role === 'tecnico') {
+    menu = [
+      { id: 'mis-tareas', label: '💼 Mis Tareas Asignadas', section: 'Frentes de Trabajo' },
+      { id: 'averias-zona-tec', label: '📋 Historial de Averías', section: 'Consulta Local' }
+    ];
+  }
+  
+  let currentSec = '';
+  menu.forEach((item, index) => {
+    if (item.section !== currentSec) {
+      currentSec = item.section;
+      const lbl = document.createElement('div');
+      lbl.className = 'sidebar-section-label';
+      lbl.innerText = item.section;
+      nav.appendChild(lbl);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'nav-item';
+    btn.innerHTML = `<span>${item.label}</span>`;
+    btn.onclick = () => {
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const sb = document.getElementById('sidebar');
+      if(sb.classList.contains('open')) sb.classList.remove('open'); // Cierra en móviles al tocar
+      renderView(item.id);
+    };
+    nav.appendChild(btn);
+    
+    // Forzar activación visual de la primera pestaña por defecto
+    if (index === 0) {
+      btn.classList.add('active');
+    }
+  });
+  
+  renderView(menu[0].id);
+}
+
+function renderView(viewId) {
+  const main = document.getElementById('main-content');
+  main.innerHTML = '';
+  
+  switch(viewId) {
+    case 'kpis': renderNacionalKPIs(main); break;
+    case 'zona-view': renderZonaDashboard(main); break;
+    case 'averias': renderAveriasModulo(main); break;
+    case 'ordenes': renderOrdenesModulo(main); break;
+    case 'usuarios': renderUsuariosModulo(main); break;
+    case 'mis-tareas': renderTecnicoModulo(main); break;
+    case 'averias-zona-tec': renderAveriasSoloLectura(main); break;
+  }
+}
+
+/* ============================================================
+   MÓDULO: RESTRICCIÓN Y DESPLIEGUE DE DASHBOARDS
+   ============================================================ */
+function renderNacionalKPIs(c) {
+  c.innerHTML = `
+    <div class="card">
+      <h2 style="color:var(--blue-dark); margin-bottom:4px;">Cuadro de Mando Corporativo (Nacional)</h2>
+      <p style="color:var(--txt-muted); font-size:13.5px; margin-bottom:24px;">Métricas consolidadas de calidad y disponibilidad país.</p>
+      
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-good"><div class="kpi-label">Disponibilidad Core</div><div class="kpi-value">99.64%</div><div style="font-size:11px;color:var(--green)">Meta ≥ 99.5%</div></div>
+        <div class="kpi-card kpi-good"><div class="kpi-label">MTBF Consolidado</div><div class="kpi-value">745 h</div><div style="font-size:11px;color:var(--green)">Meta ≥ 720 h</div></div>
+        <div class="kpi-card kpi-good"><div class="kpi-label">MTTR Central</div><div class="kpi-value">3.15 h</div><div style="font-size:11px;color:var(--green)">Meta ≤ 4 h</div></div>
+        <div class="kpi-card kpi-good"><div class="kpi-label">Cumplimiento Plan (CPP)</div><div class="kpi-value">96.0%</div><div style="font-size:11px;color:var(--green)">Meta ≥ 95%</div></div>
+      </div>
+      
+      <div style="max-width:600px; margin-top:24px;">
+        <h3 style="margin-bottom:14px; font-size:14px;">Carga de Averías Críticas por Zona</h3>
+        <canvas id="chart-nacional-zonas" height="200"></canvas>
+      </div>
+    </div>
+  `;
+  
+  setTimeout(() => {
+    new Chart(document.getElementById('chart-nacional-zonas'), {
+      type: 'bar',
+      data: {
+        labels: ZONES,
+        datasets: [{ label: 'Averías Activas', data: [3, 2, 1, 4, 2, 5, 1], backgroundColor: '#0033A0', borderRadius: 4 }]
+      },
+      options: { plugins: { legend: { display: false } } }
+    });
+  }, 100);
+}
+
+function renderZo  --border:     #D0D9EC;
   --txt:        #1A2B4A;
   --txt-muted:  #5A6E8C;
   --shadow:     0 2px 12px rgba(0,30,100,.10);
