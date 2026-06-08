@@ -1,5 +1,5 @@
-// OPTINET — Service Worker Avanzado v2.0
-const CACHE_NAME = 'optinet-assets-v2';
+// CANTV GPON — Service Worker v1.0
+const CACHE_NAME = 'cantv-gpon-v1';
 const ASSETS = [
   '/',
   '/index.html',
@@ -38,8 +38,9 @@ self.addEventListener('fetch', event => {
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       }).catch(() => {
-        // Tolerancia a fallas de red en campo
-        return null;
+        if (event.request.destination === 'document') {
+          return caches.match('/index.html');
+        }
       });
     })
   );

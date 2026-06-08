@@ -1,7 +1,7 @@
 {
-  "name": "OPTINET — Sistema Inteligente de Redes Ópticas",
-  "short_name": "OPTINET",
-  "description": "Sistema Inteligente de Operaciones, Monitoreo y Mantenimiento de Redes Ópticas",
+  "name": "CANTV — Sistema de Gestión GPON",
+  "short_name": "CANTV GPON",
+  "description": "Sistema de gestión de mantenimiento para la red de fibra óptica GPON de CANTV",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#001E5C",

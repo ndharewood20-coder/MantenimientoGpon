@@ -1,55 +1,106 @@
-# OPTINET — Sistema Inteligente de Operaciones, Monitoreo y Mantenimiento de Redes Ópticas
+# CANTV — Sistema de Gestión de Mantenimiento GPON
 
-Plataforma web progresiva (PWA) de nivel corporativo diseñada para la gestión, monitoreo y optimización de planes de mantenimiento predictivo, preventivo y correctivo en infraestructuras de redes ópticas (GPON/ODN). Desarrollada como un sistema de alta disponibilidad tolerante a fallas y optimizada para despliegue inmediato en Netlify.
+Plataforma web progresiva (PWA) para la gestión integral del plan de mantenimiento de la red de fibra óptica GPON de CANTV, desarrollada como parte del Proyecto de Grado de la UCAB.
 
-## 🛠️ Arquitectura de Archivos del Proyecto
+## Archivos del Proyecto
 
 | Archivo | Descripción |
 |---|---|
-| `index.html` | Core de la aplicación (Single-Page App) con interfaz optimizada, analítica de datos en `Chart.js` e ingesta masiva por celdas. |
-| `manifest.json` | Configuración PWA nativa para habilitar la instalación en dispositivos móviles (iOS / Android). |
-| `service-worker.js` | Motor de persistencia y caché en segundo plano para operaciones offline en zonas sin cobertura de campo. |
-| `netlify.toml` | Directivas del servidor Netlify para el control agresivo de caché, evitando desincronizaciones en navegadores móviles (Safari/Chrome). |
-| `icon.png` | Identidad visual e ícono de la aplicación para pantallas de inicio. |
+| `index.html` | Aplicación completa (single-page app) |
+| `manifest.json` | Configuración PWA para instalación en móviles |
+| `service-worker.js` | Caché offline para uso sin conexión |
+| `netlify.toml` | Configuración de despliegue en Netlify |
+| `icon.png` | Ícono de la aplicación (logo CANTV) |
 
-## 📡 Capa de Persistencia y Sincronización en Tiempo Real
+## Despliegue en Netlify
 
-Para resolver los problemas de pérdida de datos entre dispositivos (especialmente en entornos móviles como iPhone), **OPTINET** implementa una arquitectura híbrida de datos:
-1. **Firebase Realtime Database (Nodo Principal):** Sincronización bidireccional instantánea. Las averías inyectadas o cerradas se reflejan inmediatamente en las pantallas de los técnicos y gerentes de zona sin necesidad de recargar la página.
-2. **Memoria Local de Respaldo (Local-Realtime Fallback):** En caso de caídas de red o zonas sin cobertura, el sistema almacena las planillas localmente y las propaga de manera segura en ráfaga una vez se restablece la portadora.
+### Opción 1 — Arrastrar y soltar (más fácil)
+1. Ir a [app.netlify.com](https://app.netlify.com)
+2. Iniciar sesión o crear una cuenta gratuita
+3. En el panel principal, arrastrar la **carpeta completa** del proyecto al área de despliegue
+4. Netlify generará automáticamente una URL pública (ej: `https://cantv-gpon.netlify.app`)
 
-## 👥 Matriz de Roles Jerárquicos y Permisos
+### Opción 2 — GitHub + Netlify (recomendado para actualizaciones)
+1. Subir todos los archivos a un repositorio de GitHub
+2. En Netlify: New site → Import from Git → Seleccionar el repositorio
+3. Build command: (dejar vacío)
+4. Publish directory: `.` (punto)
+5. Click en Deploy
 
-La plataforma cuenta con un gobierno de datos estricto dividido en tres niveles operativos:
+## Instalación como App Móvil (PWA)
 
-* **Gerente General (Administrador Nacional):** Acceso irrestricto a toda la plataforma. Visualización de los KPIs macros del país (Disponibilidad de Red, MTBF, MTTR Nacional, Cumplimiento del Plan CPP). Gestión global de usuarios e ingesta masiva de matrices de avería.
-* **Gerente de Zona:** Control táctico limitado exclusivamente a su región geográfica. Puede visualizar cantidad, tipo y detalles de averías locales, administrar técnicos y asignar tareas en lote. **Por diseño de seguridad, tiene restringido el acceso a los KPIs macro corporativos.**
-* **Técnico de Zona:** Interfaz ultra-simplificada optimizada para teléfonos móviles. Dispone de pestañas exclusivas para visualizar sus Órdenes de Trabajo (OT) asignadas y ejecutar el llenado de las planillas oficiales en campo. No posee permisos de creación ni reasignación.
+### Android (Chrome)
+1. Abrir la URL del sitio en Chrome
+2. Tocar el menú (tres puntos) → "Agregar a pantalla de inicio"
+3. Confirmar la instalación
+4. La app aparecerá como ícono en el escritorio
 
-## 📋 Planillas Digitales Integradas (Fidelidad Anexo A)
+### iPhone / iPad (Safari)
+1. Abrir la URL en Safari
+2. Tocar el botón de compartir (cuadrado con flecha)
+3. Seleccionar "Agregar a pantalla de inicio"
+4. Confirmar el nombre y tocar "Agregar"
 
-Los formularios han sido despojados de campos irrelevantes, solicitando única y exclusivamente la información técnica exigida en los formatos originales de ingeniería:
+## Credenciales de Acceso
 
-### Mantenimiento Preventivo (Formatos MP-D-001 / MP-CON-001)
-* Checklist interactivo con selectores rápidos **OK / NOK** para verificar la integridad de cajas CTO/FAT, estanqueidad y limpieza de conectores.
-* Campos numéricos estrictos para el registro de Potencia Óptica Downstream (dBm) y Atenuación del Enlace (dB).
+| Usuario | Contraseña | Rol | Zona |
+|---|---|---|---|
+| admin | admin123 | Administrador | Todas |
+| tecnico1 | tec123 | Técnico | ALTAVISTA |
+| tecnico2 | tec123 | Técnico | UNARE |
+| tecnico3 | tec123 | Técnico | PURTO ORDAZ |
 
-### Mantenimiento Correctivo (Formato OT-GPON-001)
-* Despliegue automático de datos del abonado (Nombre, ubicación, teléfono).
-* Diagnóstico guiado: Menú de selección para Causa Raíz y Acción Técnico-Correctiva aplicada.
-* Registro comparativo de Atenuación Antes vs. Después (dB) y confirmación de restablecimiento de portadora.
+## Módulos Disponibles
 
-## 🚀 Guía de Despliegue en Netlify
+### Administrador
+- **Panel KPIs**: Disponibilidad, MTBF, MTTR, CPP, gráficos por zona y tipo
+- **Órdenes de Trabajo**: Crear OTs preventivas/correctivas, asignar por zona y cuadrilla
+- **Averías**: Vista completa con clasificación por severidad (5 niveles), filtros, crear OT desde avería
+- **Historial**: Registro cronológico de todas las actividades con exportación
+- **Red ODN**: Vista tabla + árbol interactivo con todos los detalles de conexión
+- **Usuarios**: Gestión de técnicos y cuadrillas
+- **Cargar Datos**: Importar Excel de averías y TDC ODN
 
-### Opción Rápida (Drag and Drop)
-1. Comprime los archivos (`index.html`, `manifest.json`, `service-worker.js`, `netlify.toml` e `icon.png`) en un archivo `.zip` o manténlos en una carpeta local.
-2. Inicia sesión en [app.netlify.com](https://app.netlify.com).
-3. Arrastra la carpeta o el `.zip` directamente al área de carga de Netlify (**Deploys**).
-4. La plataforma asignará una URL pública segura con certificado SSL automático de inmediato.
+### Técnico
+- **Mis Órdenes**: Ver tareas asignadas, iniciar trabajo, completar con planilla digital
+- **Averías**: Ver averías asignadas por severidad con datos del cliente
+- **Red ODN**: Consultar conexiones de su zona
 
-### Modificación de Parámetros Firebase
-Para apuntar la aplicación a tu propia instancia de base de datos en producción, edita la constante de inicialización en el archivo `index.html`:
-```javascript
-const firebaseConfig = {
-  databaseURL: "[https://tu-nodo-firebase-default-rtdb.firebaseio.com/](https://tu-nodo-firebase-default-rtdb.firebaseio.com/)"
-};
+## Planillas Digitales Integradas
+
+### Preventivo (Formatos MP-D-001, MP-CON-001)
+- Checklists interactivos por actividad (PR-01 a PE-22)
+- Registro de potencia óptica, atenuación, temperatura
+- Estado general y observaciones
+
+### Correctivo (Formato OT-GPON-001)
+- Datos completos del cliente desde la avería
+- Causa raíz con opciones predeterminadas
+- Acción correctiva realizada
+- Mediciones antes/después
+- Confirmación de restablecimiento del servicio
+
+## Clasificación de Averías (Sistema Propio)
+
+Basado en el Anexo A del Plan de Mantenimiento:
+
+| Código | Descripción | Severidad | Procedimiento |
+|---|---|---|---|
+| NNV | No Navega | Mayor (2) | MC-04 |
+| NONAV | Sin Navegación | Mayor (2) | MC-04 |
+| NL | Navega Lento | Degradación (5) | MC-05 |
+| ONT_DANADO | ONT Dañada | Menor (4) | MC-04 |
+| LOS | Pérdida de Señal PON | Crítica (1) | MC-02 |
+| CORTE | Corte de Cable | Crítica (1) | MC-03 |
+| OLT_FALLA | Falla Total OLT | Crítica (1) | MC-01 |
+| DEGRAD | Degradación de Señal | Degradación (5) | MC-05 |
+| TELIP | Falla Telefonía IP | Moderada (3) | MC-04 |
+| BYPASS | Bypass de Emergencia | Crítica (1) | MC-06 |
+
+## Notas Técnicas
+
+- Todos los datos se almacenan en `localStorage` del navegador
+- Compatible con Chrome, Firefox, Safari y Edge
+- Diseño responsive para móviles, tablets y escritorio
+- Sin dependencias de servidor — funciona completamente en el cliente
+- Los datos persisten entre sesiones en el mismo dispositivo/navegador
