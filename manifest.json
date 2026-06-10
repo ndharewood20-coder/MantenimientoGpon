@@ -1,6 +1,6 @@
 {
   "name": "CANTV — Sistema de Gestión GPON",
-  "short_name": "CANTV GPON",
+  "short_name": "OPTINET",
   "description": "Sistema de gestión de mantenimiento para la red de fibra óptica GPON de CANTV",
   "start_url": "/",
   "display": "standalone",
